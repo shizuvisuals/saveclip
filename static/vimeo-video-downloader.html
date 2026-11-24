@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vimeo Video Downloader – Save Vimeo Videos in HD | SaveClip</title>
+<meta name="description" content="Free Vimeo video downloader. Paste a public link and save the video in regular, HD or enhanced HD quality. No signup.">
+<!-- PASTE YOUR ADSENSE / AD NETWORK SCRIPT HERE -->
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#14161f;--muted:#6b7080;--accent:#5b5bf0;--line:#e3e5ee;--ad:#eef0f7}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1117;--card:#181b25;--text:#eef0f7;--muted:#9aa0b4;--line:#2a2e3d;--ad:#202433}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5}
+main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.6rem;margin:8px 0 4px}
+.sub{color:var(--muted);margin:0 0 18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:1rem}
+.btns{display:grid;gap:10px;margin-top:14px}
+button{padding:14px;border-radius:12px;border:0;font-size:1rem;font-weight:600;cursor:pointer;color:#fff;background:var(--accent)}
+button.alt{background:transparent;color:var(--accent);border:2px solid var(--accent)}
+button:disabled{opacity:.5;cursor:wait}
+button small{display:block;font-weight:400;opacity:.85;font-size:.78rem}
+.ad{margin:16px 0;min-height:90px;overflow:hidden;text-align:center}
+#status{margin-top:14px;color:var(--muted);font-size:.9rem;min-height:1.3em}
+#status.err{color:#d33}
+footer{color:var(--muted);font-size:.78rem;margin-top:22px}
+footer a{color:var(--muted)}
+section.info{margin-top:22px}section.info h2{font-size:1.15rem}section.info h3{font-size:1rem;margin:14px 0 4px}section.info p,section.info li{color:var(--muted);font-size:.93rem}.links{margin-top:14px;line-height:2}.links a{margin-right:10px}
+</style>
+<link rel="canonical" href="https://example.com/vimeo-video-downloader"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I download password-protected Vimeo videos?", "acceptedAnswer": {"@type": "Answer", "text": "No. Private, password-protected or download-disabled videos are not supported."}}, {"@type": "Question", "name": "Is it free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. There is no signup and no limit on how many times you can visit, though downloads per hour are capped to keep the service fast for everyone."}}, {"@type": "Question", "name": "Which quality should I pick?", "acceptedAnswer": {"@type": "Answer", "text": "Regular is the fastest and smallest. HD gives you up to 1080p when the original is available. AI HD upscales and sharpens the video, so it takes longer but can look better on low-resolution clips."}}]}</script>
+</head>
+<body>
+<main>
+<h1>Vimeo Video Downloader</h1>
+<p class="sub">Paste a public Vimeo link and pick a quality.</p>
+
+<div class="ad" id="ad-top"><!-- AD UNIT: top banner --></div>
+
+<div class="card">
+<input id="url" type="url" inputmode="url" placeholder="Paste video link here">
+<div class="btns">
+<button class="alt" data-q="regular">Regular quality<small>Fastest, smaller file</small></button>
+<button data-q="hd">HD video<small>Up to 1080p</small></button>
+<button data-q="ai">AI HD video<small>Upscaled, denoised and sharpened (slower)</small></button>
+</div>
+<div id="status"></div>
+</div>
+
+<div class="ad" id="ad-mid"><!-- AD UNIT: below the tool --></div>
+
+<section class="info"><h2>How to download Vimeo videos</h2><p>Save public Vimeo videos in regular or HD quality. Paste the video page link above and pick a quality.</p><ol><li>Copy the link. Copy the link from your browser&#x27;s address bar while watching the video.</li><li>Paste it into the box above.</li><li>Tap Regular, HD or AI HD and wait for the download to start.</li></ol><h2>FAQ</h2><h3>Can I download password-protected Vimeo videos?</h3><p>No. Private, password-protected or download-disabled videos are not supported.</p><h3>Is it free?</h3><p>Yes. There is no signup and no limit on how many times you can visit, though downloads per hour are capped to keep the service fast for everyone.</p><h3>Which quality should I pick?</h3><p>Regular is the fastest and smallest. HD gives you up to 1080p when the original is available. AI HD upscales and sharpens the video, so it takes longer but can look better on low-resolution clips.</p><p>Please only save Vimeo videos you own or have permission to download.</p></section>
+<footer>Only download content you own or have permission to save. Not affiliated with any social media platform. Videos up to 5 minutes. <a href="/legal.html">Privacy, Terms &amp; DMCA</a><div class="links"><a href="/tiktok-video-downloader">TikTok</a><a href="/instagram-reels-downloader">Instagram Reels</a><a href="/facebook-video-downloader">Facebook</a><a href="/twitter-video-downloader">Twitter / X</a><a href="/pinterest-video-downloader">Pinterest</a><a href="/reddit-video-downloader">Reddit</a><a href="/vimeo-video-downloader">Vimeo</a></div></footer>
+</main>
+<script>
+const status = document.getElementById("status");
+const buttons = document.querySelectorAll("button[data-q]");
+function say(t, bad){ status.textContent = t; status.className = bad ? "err" : ""; }
+buttons.forEach(b => b.addEventListener("click", async () => {
+  const url = document.getElementById("url").value.trim();
+  if (!/^https?:\/\//i.test(url)) return say("Please paste a valid link.", true);
+  buttons.forEach(x => x.disabled = true);
+  say(b.dataset.q === "ai" ? "Enhancing video, this can take a minute or two..." : "Fetching video, please wait...");
+  try {
+    const r = await fetch("/api/download?q=" + b.dataset.q + "&url=" + encodeURIComponent(url));
+    if (!r.ok) {
+      let m = "Something went wrong."; try { m = (await r.json()).error || m; } catch(e){}
+      throw new Error(m);
+    }
+    const blob = await r.blob();
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "video-" + b.dataset.q + ".mp4";
+    document.body.appendChild(a); a.click(); a.remove();
+    say("Done! Your download should start now.");
+  } catch (e) { say(e.message, true); }
+  buttons.forEach(x => x.disabled = false);
+}));
+</script>
+</body>
+</html>
